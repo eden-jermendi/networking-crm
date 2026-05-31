@@ -51,6 +51,10 @@ Report:
 
 Then stop.
 
+---
+
+# IMPORTANT
+
 ## Git Workflow Rules
 
 ### Branch Naming
