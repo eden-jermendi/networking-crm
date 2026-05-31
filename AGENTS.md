@@ -55,7 +55,7 @@ Then stop.
 
 # IMPORTANT
 
-## Git Workflow Rules
+## Git/Repo Workflow Rules
 
 ### Branch Naming
 
