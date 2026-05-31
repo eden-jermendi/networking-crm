@@ -23,3 +23,15 @@ App-level validation preferred over DB enums for MVP.
 
 Decision 008:
 Follow-ups may have nullable foreign keys at DB level but must be associated with at least one entity through application logic.
+
+Decision 009:
+Package manager for TASK-001 and current scaffold = npm.
+
+Decision 010:
+Initial repository layout uses a root npm workspace with `client/` and `server/` workspaces.
+
+Decision 011:
+Initial server health route = `GET /health`, returning `{ "status": "ok" }`.
+
+Decision 012:
+Root script names for scaffold checks are `dev:client`, `dev:server`, `typecheck`, and `build`.
