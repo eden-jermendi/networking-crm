@@ -52,3 +52,53 @@ Currently in early development.
 The project is following an Agentic SDLC workflow:
 
 Idea → Proposal → Architecture → Tasks → Implementation → Review → Continuous Improvement
+
+## Setup
+
+Install dependencies from the repository root:
+
+```bash
+npm install
+```
+
+Run the client:
+
+```bash
+npm run dev:client
+```
+
+Run the server:
+
+```bash
+npm run dev:server
+```
+
+The server listens on port `3000` by default.
+
+Health check:
+
+```bash
+curl http://localhost:3000/health
+```
+
+Expected response:
+
+```json
+{
+  "status": "ok"
+}
+```
+
+## Development Checks
+
+Run TypeScript checks:
+
+```bash
+npm run typecheck
+```
+
+Build all workspaces:
+
+```bash
+npm run build
+```
