@@ -4,7 +4,7 @@
 
 Phase 0 project setup is complete.
 
-The project is ready for human review of the next proposed task sequence before TASK-002 begins.
+TASK-002 is paused after schema planning and before migration implementation.
 
 ## Completed Work
 
@@ -69,7 +69,73 @@ Server workspace commands:
 
 ## Recommended Next Task
 
-Recommended next task: TASK-002, add MVP 1 database migrations.
+Recommended next task: resume TASK-002, add MVP 1 database migrations.
 
 Rationale:
 The scaffold is complete and the next dependency for all CRM behavior is the approved relational schema.
+
+## TASK-002 Resume Checkpoint
+
+Branch:
+
+- `feat/database-migrations`
+
+Current state:
+
+- Latest `origin/main` was fetched and pulled before TASK-002 planning.
+- Branch `feat/database-migrations` was created from latest `main`.
+- Required docs were read.
+- Existing Knex/SQLite config was inspected in `server/knexfile.ts`.
+- Migration implementation has not started.
+- No migrations, seed files, database functions, API routes, frontend code, auth, deployment, integrations, or future MVP work have been created.
+
+Schema source of truth:
+
+- `docs/specs/active/db-schema.md`
+
+Planning result:
+
+- No conflicts were found between `db-schema.md`, `architecture.md`, and `decisions.md`.
+- The schema is ready to translate into Knex migrations after human approval of the open implementation details below.
+
+Tables to create:
+
+- `contacts`
+- `networking_events`
+- `interactions`
+- `follow_ups`
+
+Do not create:
+
+- `contact_events`
+- Any job tracking, auth, user, external integration, notification, analytics, or future MVP tables.
+
+Planned relationships:
+
+- `interactions.contact_id` references `contacts.id`.
+- `interactions.networking_event_id` references `networking_events.id`.
+- `follow_ups.contact_id` references `contacts.id`.
+- `follow_ups.networking_event_id` references `networking_events.id`.
+- `follow_ups.interaction_id` references `interactions.id`.
+
+Recommended delete behavior awaiting approval:
+
+- Use `RESTRICT` for all foreign keys.
+- Rationale: MVP 1 has no approved delete workflows, relationship history should be preserved, `CASCADE` could remove useful history, and `SET NULL` could orphan follow-ups.
+
+Recommended indexes awaiting approval:
+
+- Index all foreign key columns.
+- Index `follow_ups.due_at`.
+- Consider index `follow_ups(status, due_at)` for upcoming follow-up queries.
+
+Recommended timestamp behavior awaiting approval:
+
+- Create required `created_at` and `updated_at` columns.
+- Do not add DB defaults unless explicitly approved.
+- Let application or seed logic populate timestamp values in later tasks.
+
+Implementation reminder:
+
+- TASK-002 may update only migration files/configuration as needed and README setup notes if migration commands need documentation.
+- TASK-002 must not create seeds, database functions, CRM API routes, frontend CRM screens, validation logic, auth, deployment configuration, external APIs, or future MVP functionality.

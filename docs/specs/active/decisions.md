@@ -35,3 +35,6 @@ Initial server health route = `GET /health`, returning `{ "status": "ok" }`.
 
 Decision 012:
 Root script names for scaffold checks are `dev:client`, `dev:server`, `typecheck`, and `build`.
+
+Decision 013:
+`docs/specs/active/db-schema.md` is the primary database schema source of truth for TASK-002 migrations.

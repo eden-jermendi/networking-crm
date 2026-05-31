@@ -39,8 +39,33 @@ Stopped after scaffold only.
 
 ### TASK-002: Add MVP 1 database migrations
 
+Status: Paused after schema planning; implementation not started.
+
 Goal:
 Create Knex migrations for the approved MVP 1 tables and relationships.
+
+Planning checkpoint:
+
+- Required docs were read.
+- Existing Knex/SQLite configuration was inspected.
+- `docs/specs/active/db-schema.md` was treated as the primary schema source of truth.
+- No conflicts were found between `db-schema.md`, `architecture.md`, and `decisions.md`.
+- No files were modified during the migration planning pass.
+- No migrations, seeds, database functions, API routes, or frontend code were created.
+
+Approved migration interpretation:
+
+- Create only `contacts`, `networking_events`, `interactions`, and `follow_ups`.
+- Do not create `contact_events`.
+- Use nullable follow-up parent foreign keys at DB level.
+- Do not add DB enum/check constraints for statuses or types.
+- Enforce "follow-up must have at least one parent entity" later in application logic, not in TASK-002 migrations.
+
+Pending human approval before implementation:
+
+- Confirm foreign key delete behavior. Current recommendation: `RESTRICT` for all foreign keys.
+- Confirm indexes. Current recommendation: index all foreign keys, `follow_ups.due_at`, and optionally `follow_ups(status, due_at)`.
+- Confirm timestamp handling. Current recommendation: required `created_at` and `updated_at` columns with values supplied by application/seed logic, not DB defaults.
 
 Allowed changes:
 
