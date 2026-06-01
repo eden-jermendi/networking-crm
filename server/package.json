@@ -7,7 +7,11 @@
     "dev": "tsx src/index.ts",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/src/index.js",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "knex": "tsx ../node_modules/knex/bin/cli.js --knexfile knexfile.ts",
+    "migrate:latest": "npm run knex -- migrate:latest",
+    "migrate:rollback": "npm run knex -- migrate:rollback",
+    "migrate:status": "npm run knex -- migrate:status"
   },
   "dependencies": {
     "express": "^5.0.0",

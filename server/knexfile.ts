@@ -6,6 +6,10 @@ const config: Record<string, Knex.Config> = {
     connection: {
       filename: "./data/networking-crm.sqlite3"
     },
+    migrations: {
+      directory: "./migrations",
+      extension: "ts"
+    },
     useNullAsDefault: true
   }
 };
