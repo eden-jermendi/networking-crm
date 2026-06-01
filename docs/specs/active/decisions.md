@@ -65,3 +65,9 @@ TASK-003 seed data uses fictional but domain-specific junior developer networkin
 
 Decision 022:
 TASK-003 seed data is repeatable by clearing MVP 1 tables in dependency order before inserting fixed local development records.
+
+Decision 023:
+TASK-004 backend database functions use simple Knex repository factories that receive a database instance. This keeps production code wired to the configured SQLite database while allowing tests to use isolated in-memory SQLite databases.
+
+Decision 024:
+TASK-004 database functions do not enforce request validation rules that are reserved for later API validation work. Follow-up parent ownership remains a later application-level validation concern.

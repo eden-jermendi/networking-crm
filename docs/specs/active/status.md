@@ -68,6 +68,20 @@ TASK-003 added:
 - Repeatable seed behavior by clearing MVP 1 tables before inserting fixed records.
 - Seed tests for counts, relationships, parent linkage, and repeatability.
 
+### TASK-004: Add backend database functions
+
+Status: Complete
+
+TASK-004 added:
+
+- Knex database connection helper.
+- MVP 1 database row and input types.
+- Contact repository functions for list, read, and create behavior.
+- Networking event repository functions for list, read, and create behavior.
+- Interaction repository function for create behavior.
+- Follow-up repository functions for upcoming list, read, create, and update behavior.
+- Repository tests using isolated SQLite databases with migrations and seed data.
+
 ## Available Commands
 
 Root commands:
@@ -105,7 +119,6 @@ Server workspace commands:
 
 ## Intentionally Not Implemented Yet
 
-- Database access functions.
 - CRM API routes.
 - API validation/error handling beyond the scaffold health route.
 - Frontend data fetching.
@@ -120,18 +133,17 @@ Server workspace commands:
 
 - `npm install` previously reported npm audit vulnerabilities from dependency output. These should be reviewed separately and not auto-fixed without understanding dependency impact.
 - The local SQLite database file is generated during migration checks and ignored by git.
-- Runtime database connection modules do not exist yet.
 - `SENIOR_CHECKLIST.md` exists and should continue to be used during review.
 - API contracts in `architecture.md` are still marked draft and should be reviewed before route implementation.
 - Follow-up parent ownership is not enforced at DB level by design. It must be enforced in application logic in a later task.
-- Current test coverage is focused on database migrations and seed data. Repository, API, validation, and frontend tests are planned for their respective tasks.
+- Current test coverage is focused on database migrations, seed data, and repository functions. API, validation, and frontend tests are planned for their respective tasks.
 
 ## Recommended Next Task
 
-Recommended next task: TASK-004, add backend database functions.
+Recommended next task: TASK-005, add MVP 1 backend API routes.
 
 Rationale:
-The approved schema and seed data now exist with automated coverage. Backend database functions are the next dependency before API routes.
+The approved schema, seed data, and database functions now exist with automated coverage. Backend API routes are the next dependency before API validation and frontend data fetching.
 
 ## TASK-002 Completion Checkpoint
 
