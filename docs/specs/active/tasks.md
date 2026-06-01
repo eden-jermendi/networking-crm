@@ -225,8 +225,18 @@ Human reviews seed shape and sample data before database functions begin.
 
 ### TASK-004: Add backend database functions
 
+Status: Complete
+
 Goal:
 Create backend data access functions for MVP 1 entities without exposing HTTP CRM routes yet.
+
+Completed scope:
+
+- Added a Knex database connection helper.
+- Added TypeScript row and input types for MVP 1 tables.
+- Added repository factories for contacts, networking events, interactions, and follow-ups.
+- Added repository tests using isolated SQLite databases with migrations and seed data.
+- Kept Express routes and frontend code unchanged.
 
 Allowed changes:
 
@@ -244,11 +254,11 @@ Forbidden changes:
 
 Acceptance criteria:
 
-- Database connection uses the existing Knex/SQLite setup.
-- Functions support MVP 1 read/create/update needs implied by the draft API surface.
-- Follow-up completion can be represented.
-- Repository functions stay simple and entity-focused.
-- No HTTP route behavior is introduced.
+- [x] Database connection uses the existing Knex/SQLite setup.
+- [x] Functions support MVP 1 read/create/update needs implied by the draft API surface.
+- [x] Follow-up completion can be represented.
+- [x] Repository functions stay simple and entity-focused.
+- [x] No HTTP route behavior is introduced.
 
 Required tests/checks:
 
