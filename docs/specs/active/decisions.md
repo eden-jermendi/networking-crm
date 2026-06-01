@@ -71,3 +71,9 @@ TASK-004 backend database functions use simple Knex repository factories that re
 
 Decision 024:
 TASK-004 database functions do not enforce request validation rules that are reserved for later API validation work. Follow-up parent ownership remains a later application-level validation concern.
+
+Decision 025:
+TASK-005 API routes use an injectable route dependency boundary. Production wiring uses the existing Knex repository factories, while route tests mock repository functions to keep HTTP behavior tests focused.
+
+Decision 026:
+TASK-005 implements only the approved MVP 1 draft API surface from `architecture.md`: contacts, networking events, interactions, and follow-ups. API validation and consistent error response design remain deferred to TASK-006.
