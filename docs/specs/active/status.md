@@ -2,9 +2,9 @@
 
 ## Current Stage
 
-Phase 1 MVP 1 backend API foundation is in progress.
+Phase 1 MVP 1 frontend API foundation is in progress.
 
-TASK-006 API validation and error handling are complete and ready for human review.
+TASK-007 frontend data fetching setup is complete and ready for human review.
 
 ## Completed Work
 
@@ -126,6 +126,18 @@ TASK-006 added:
 - API route tests for invalid IDs, missing records, required fields, follow-up parent ownership, no-mutation invalid requests, and generic internal errors.
 - Manual valid and invalid API checks through the local dev server.
 
+### TASK-007: Add frontend data fetching setup
+
+Status: Complete
+
+TASK-007 added:
+
+- Frontend TypeScript API types for contacts, networking events, interactions, follow-ups, request inputs, and structured API errors.
+- Fetch-based frontend helpers for the approved MVP 1 API surface.
+- `ApiError` handling for backend JSON errors and fallback request failures.
+- Client Vitest configuration and mocked-fetch tests for success and error behavior.
+- Root test scripts updated so `npm run test` and `npm run test:coverage` run both client and server test suites.
+
 ## Available Commands
 
 Root commands:
@@ -163,7 +175,6 @@ Server workspace commands:
 
 ## Intentionally Not Implemented Yet
 
-- Frontend data fetching.
 - Frontend CRM screens or forms.
 - Authentication or user accounts.
 - Deployment configuration.
@@ -178,14 +189,15 @@ Server workspace commands:
 - `SENIOR_CHECKLIST.md` exists and should continue to be used during review.
 - API contracts in `architecture.md` are still marked draft and should be reviewed after TASK-006 validation behavior.
 - Current validation is intentionally simple and does not introduce DB enum constraints or validation dependencies.
-- Current test coverage is focused on database migrations, seed data, repository functions, API route behavior, and API validation/error handling. Frontend tests are planned for their respective tasks.
+- Frontend API helpers default to the local server base URL and can be overridden with `VITE_API_BASE_URL`.
+- Current test coverage includes database migrations, seed data, repository functions, API routes, validation/error handling, and frontend API helpers. Frontend screen tests are planned for TASK-008.
 
 ## Recommended Next Task
 
-Recommended next task: TASK-007, add frontend data fetching setup.
+Recommended next task: TASK-008, add minimal MVP 1 frontend screens and forms.
 
 Rationale:
-The backend API route surface now exists with validation and consistent errors. Frontend data fetching helpers are the next dependency before building CRM screens and forms.
+The backend API route surface and frontend API helper boundary now exist with test coverage. Minimal frontend screens and forms are the next step for usable MVP 1 workflows.
 
 ## TASK-002 Completion Checkpoint
 

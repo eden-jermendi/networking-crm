@@ -83,3 +83,6 @@ TASK-006 API validation remains dependency-free. Validation helpers live in the 
 
 Decision 028:
 TASK-006 API errors use a consistent JSON shape: `{ "error": { "code": string, "message": string, "details": string[] } }`. Unexpected server errors return a generic message and do not expose stack traces.
+
+Decision 029:
+TASK-007 frontend data fetching uses simple fetch-based helpers with typed request and response objects. The default API base URL is `http://127.0.0.1:3000` for local development and can be overridden with `VITE_API_BASE_URL`.
