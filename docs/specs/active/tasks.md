@@ -37,6 +37,21 @@ Stopped after scaffold only.
 
 ## Phase 1: MVP 1 Data Foundation
 
+### Current Testing Plan
+
+Goal:
+Add backend tests incrementally before frontend work so data and API behavior are verified as each layer is introduced.
+
+Testing approach:
+
+- Use Vitest for server-side tests.
+- Use V8 coverage through `npm run test:coverage`.
+- Test database migrations against isolated in-memory SQLite.
+- Prefer small focused tests at each layer.
+- Use mocks only where they protect task boundaries.
+- Use HTTP interception/mocking for frontend or API-client tests when network calls exist.
+- Do not create broad end-to-end tests until the UI exists.
+
 ### TASK-002: Add MVP 1 database migrations
 
 Status: Complete
@@ -116,6 +131,49 @@ Required tests/checks:
 Human review checkpoint:
 Human reviews the schema before seed data, database functions, or API routes begin.
 
+### TASK-002A: Add database migration tests
+
+Status: Complete
+
+Goal:
+Add focused automated tests for the approved MVP 1 database migration.
+
+Allowed changes:
+
+- Server test configuration.
+- Server migration tests.
+- Test-related npm scripts and coverage configuration.
+- Task/status/decision documentation updates.
+
+Forbidden changes:
+
+- Seed data.
+- Database access/repository functions.
+- CRM API routes.
+- Frontend CRM screens.
+- Schema changes not required to make tests possible.
+- Auth, deployment, Supabase, OAuth, external APIs, notifications, analytics, or future MVP work.
+
+Acceptance criteria:
+
+- [x] Migration tests verify approved tables are created.
+- [x] Migration tests verify required/nullability behavior for schema columns.
+- [x] Migration tests verify no database defaults for required timestamp columns.
+- [x] Migration tests verify approved foreign keys and `RESTRICT` delete behavior.
+- [x] Migration tests verify approved indexes.
+- [x] Migration tests verify rollback drops MVP 1 tables.
+- [x] Test and coverage scripts are available.
+
+Required tests/checks:
+
+- Run `npm run test`.
+- Run `npm run test:coverage`.
+- Run `npm run typecheck`.
+- Run `npm run build`.
+
+Human review checkpoint:
+Human reviews the test setup before seed data begins.
+
 ### TASK-003: Add MVP 1 seed data
 
 Goal:
@@ -147,6 +205,9 @@ Required tests/checks:
 - Run migrations.
 - Run seeds.
 - Inspect seeded rows.
+- Add or update seed tests to verify seed counts, relationships, and repeatability.
+- Run `npm run test`.
+- Run `npm run test:coverage`.
 - Run `npm run typecheck`.
 
 Human review checkpoint:
@@ -182,6 +243,11 @@ Acceptance criteria:
 Required tests/checks:
 
 - Run migrations and seeds.
+- Add repository/database-function tests for each created data access function.
+- Use isolated SQLite test databases for behavior that depends on SQL.
+- Mock only narrow boundaries that are outside the current task scope.
+- Run `npm run test`.
+- Run `npm run test:coverage`.
 - Run `npm run typecheck`.
 - Add and run focused backend checks if a test harness exists or is introduced with approval.
 
@@ -218,6 +284,11 @@ Acceptance criteria:
 Required tests/checks:
 
 - Run migrations and seeds.
+- Add API route tests for approved happy paths and missing-record behavior.
+- Mock database functions where route tests should stay focused on HTTP behavior.
+- Avoid testing frontend behavior in API route tests.
+- Run `npm run test`.
+- Run `npm run test:coverage`.
 - Run `npm run typecheck`.
 - Start server dev script.
 - Manually check each route with seeded data.
@@ -254,6 +325,10 @@ Acceptance criteria:
 
 Required tests/checks:
 
+- Add validation/error tests for required fields, invalid IDs, missing records, and follow-up parent ownership.
+- Confirm invalid requests do not mutate the database.
+- Run `npm run test`.
+- Run `npm run test:coverage`.
 - Run `npm run typecheck`.
 - Manually check valid and invalid API requests.
 - Confirm existing happy paths still work.
@@ -288,6 +363,11 @@ Acceptance criteria:
 
 Required tests/checks:
 
+- Add tests for frontend API helper success and error handling.
+- Use request interception/mocking for HTTP behavior.
+- Do not require CRM screens for these tests.
+- Run `npm run test`.
+- Run `npm run test:coverage`.
 - Run `npm run typecheck`.
 - Run `npm run build`.
 
@@ -326,6 +406,11 @@ Acceptance criteria:
 
 Required tests/checks:
 
+- Add focused component/workflow tests for forms, loading states, errors, and complete follow-up behavior.
+- Mock API helpers or intercept HTTP calls rather than requiring a real backend for component tests.
+- Preserve existing backend tests.
+- Run `npm run test`.
+- Run `npm run test:coverage`.
 - Run `npm run typecheck`.
 - Run `npm run build`.
 - Start client and server locally.
@@ -363,6 +448,8 @@ Acceptance criteria:
 Required tests/checks:
 
 - Run `npm install` if needed.
+- Run `npm run test`.
+- Run `npm run test:coverage`.
 - Run `npm run typecheck`.
 - Run `npm run build`.
 - Run migrations and seeds.
