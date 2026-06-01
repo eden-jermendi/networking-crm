@@ -102,3 +102,25 @@ Build all workspaces:
 ```bash
 npm run build
 ```
+
+## Database
+
+Run the latest migrations:
+
+```bash
+npm run db:migrate
+```
+
+Check migration status:
+
+```bash
+npm run db:status
+```
+
+Roll back the latest migration batch:
+
+```bash
+npm run db:rollback
+```
+
+The local SQLite database is created at `server/data/networking-crm.sqlite3`.
