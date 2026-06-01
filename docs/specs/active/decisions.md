@@ -77,3 +77,9 @@ TASK-005 API routes use an injectable route dependency boundary. Production wiri
 
 Decision 026:
 TASK-005 implements only the approved MVP 1 draft API surface from `architecture.md`: contacts, networking events, interactions, and follow-ups. API validation and consistent error response design remain deferred to TASK-006.
+
+Decision 027:
+TASK-006 API validation remains dependency-free. Validation helpers live in the server route layer and enforce only simple MVP 1 request-body and ID rules.
+
+Decision 028:
+TASK-006 API errors use a consistent JSON shape: `{ "error": { "code": string, "message": string, "details": string[] } }`. Unexpected server errors return a generic message and do not expose stack traces.

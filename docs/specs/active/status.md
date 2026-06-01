@@ -4,7 +4,7 @@
 
 Phase 1 MVP 1 backend API foundation is in progress.
 
-TASK-005 backend API routes are complete and ready for human review.
+TASK-006 API validation and error handling are complete and ready for human review.
 
 ## Completed Work
 
@@ -107,6 +107,25 @@ TASK-005 added:
 - API route tests for approved happy paths and missing-record behavior.
 - Manual local checks against seeded SQLite data.
 
+### TASK-006: Add API validation and error handling
+
+Status: Complete
+
+TASK-006 added:
+
+- Dependency-free API validation helpers for MVP 1 route bodies and IDs.
+- Consistent JSON error responses using:
+  - `bad_request`
+  - `validation_error`
+  - `not_found`
+  - `internal_server_error`
+- Express error handling middleware that hides stack traces in normal API responses.
+- Required-field validation for contact, networking event, interaction, and follow-up create requests.
+- Follow-up update validation for provided fields.
+- Follow-up parent ownership validation on create and update.
+- API route tests for invalid IDs, missing records, required fields, follow-up parent ownership, no-mutation invalid requests, and generic internal errors.
+- Manual valid and invalid API checks through the local dev server.
+
 ## Available Commands
 
 Root commands:
@@ -144,7 +163,6 @@ Server workspace commands:
 
 ## Intentionally Not Implemented Yet
 
-- API validation/error handling beyond the scaffold health route.
 - Frontend data fetching.
 - Frontend CRM screens or forms.
 - Authentication or user accounts.
@@ -158,17 +176,16 @@ Server workspace commands:
 - `npm install` previously reported npm audit vulnerabilities from dependency output. These should be reviewed separately and not auto-fixed without understanding dependency impact.
 - The local SQLite database file is generated during migration checks and ignored by git.
 - `SENIOR_CHECKLIST.md` exists and should continue to be used during review.
-- API contracts in `architecture.md` are still marked draft and should be reviewed after TASK-005 route implementation.
-- Follow-up parent ownership is not enforced yet. It remains reserved for TASK-006 application-level validation.
-- TASK-005 only adds minimal missing-record responses. Consistent validation and error response shape remain TASK-006 work.
-- Current test coverage is focused on database migrations, seed data, repository functions, and API route behavior. Validation and frontend tests are planned for their respective tasks.
+- API contracts in `architecture.md` are still marked draft and should be reviewed after TASK-006 validation behavior.
+- Current validation is intentionally simple and does not introduce DB enum constraints or validation dependencies.
+- Current test coverage is focused on database migrations, seed data, repository functions, API route behavior, and API validation/error handling. Frontend tests are planned for their respective tasks.
 
 ## Recommended Next Task
 
-Recommended next task: TASK-006, add API validation and error handling.
+Recommended next task: TASK-007, add frontend data fetching setup.
 
 Rationale:
-The approved backend API route surface now exists. Validation and consistent error handling are the next backend dependency before frontend data fetching.
+The backend API route surface now exists with validation and consistent errors. Frontend data fetching helpers are the next dependency before building CRM screens and forms.
 
 ## TASK-002 Completion Checkpoint
 
