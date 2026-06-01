@@ -39,6 +39,22 @@ TASK-002 added:
 - Required timestamp columns without database defaults.
 - Root migration scripts and README migration instructions.
 
+### TASK-002A: Add database migration tests
+
+Status: Complete
+
+TASK-002A added:
+
+- Vitest server test setup.
+- V8 coverage support.
+- In-memory SQLite migration tests for:
+  - approved MVP 1 tables
+  - column required/nullability behavior
+  - no timestamp database defaults
+  - foreign keys and `RESTRICT` delete behavior
+  - approved indexes
+  - rollback behavior
+
 ## Available Commands
 
 Root commands:
@@ -49,6 +65,8 @@ Root commands:
 - `npm run db:migrate`
 - `npm run db:rollback`
 - `npm run db:status`
+- `npm run test`
+- `npm run test:coverage`
 - `npm run typecheck`
 - `npm run build`
 
@@ -67,6 +85,8 @@ Server workspace commands:
 - `npm run migrate:latest --workspace server`
 - `npm run migrate:rollback --workspace server`
 - `npm run migrate:status --workspace server`
+- `npm run test --workspace server`
+- `npm run test:coverage --workspace server`
 
 ## Intentionally Not Implemented Yet
 
@@ -90,13 +110,14 @@ Server workspace commands:
 - `SENIOR_CHECKLIST.md` exists and should continue to be used during review.
 - API contracts in `architecture.md` are still marked draft and should be reviewed before route implementation.
 - Follow-up parent ownership is not enforced at DB level by design. It must be enforced in application logic in a later task.
+- Current test coverage is focused on database migrations only. Seed, repository, API, validation, and frontend tests are planned for their respective tasks.
 
 ## Recommended Next Task
 
 Recommended next task: TASK-003, add MVP 1 seed data.
 
 Rationale:
-The approved schema now exists as migrations, and seed data is the next dependency for manual database review and later backend data functions.
+The approved schema now exists as migrations and has automated migration coverage. Seed data is the next dependency for manual database review and later backend data functions.
 
 ## TASK-002 Completion Checkpoint
 

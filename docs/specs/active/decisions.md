@@ -50,3 +50,12 @@ TASK-002 timestamp columns `created_at` and `updated_at` are required but do not
 
 Decision 017:
 MVP 1 migrations are run through npm scripts: `db:migrate`, `db:rollback`, and `db:status`.
+
+Decision 018:
+Server-side tests use Vitest with V8 coverage for MVP 1 backend work.
+
+Decision 019:
+Database migration tests use isolated in-memory SQLite databases instead of the local development SQLite file.
+
+Decision 020:
+Mocking and HTTP interception should be used where they fit the layer under test: database-function tests may mock narrow boundaries when useful, API tests may use mocks around database functions, and frontend/API-client tests may use request interception. Direct migration tests should not mock the schema.

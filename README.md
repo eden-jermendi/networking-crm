@@ -91,6 +91,18 @@ Expected response:
 
 ## Development Checks
 
+Run tests:
+
+```bash
+npm run test
+```
+
+Run tests with coverage:
+
+```bash
+npm run test:coverage
+```
+
 Run TypeScript checks:
 
 ```bash
