@@ -10,6 +10,10 @@ const config: Record<string, Knex.Config> = {
       directory: "./migrations",
       extension: "ts"
     },
+    seeds: {
+      directory: "./seeds",
+      extension: "ts"
+    },
     useNullAsDefault: true
   }
 };

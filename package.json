@@ -12,6 +12,7 @@
     "db:migrate": "npm run migrate:latest --workspace server",
     "db:rollback": "npm run migrate:rollback --workspace server",
     "db:status": "npm run migrate:status --workspace server",
+    "db:seed": "npm run seed:run --workspace server",
     "test": "npm run test --workspace server",
     "test:coverage": "npm run test:coverage --workspace server",
     "build": "npm run build --workspaces",

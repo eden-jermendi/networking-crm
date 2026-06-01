@@ -129,6 +129,14 @@ Check migration status:
 npm run db:status
 ```
 
+Run local seed data:
+
+```bash
+npm run db:seed
+```
+
+Seed data is fictional and intended for local development review of junior developer networking workflows.
+
 Roll back the latest migration batch:
 
 ```bash

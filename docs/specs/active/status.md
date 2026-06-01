@@ -55,6 +55,19 @@ TASK-002A added:
   - approved indexes
   - rollback behavior
 
+### TASK-003: Add MVP 1 seed data
+
+Status: Complete
+
+TASK-003 added:
+
+- Fictional but domain-specific junior developer networking seed data.
+- Seed records for contacts, networking events, interactions, and follow-ups.
+- Interaction examples covering LinkedIn messaging, event conversations, intro calls, and coffee chats.
+- Follow-up examples linked to contacts, events, interactions, and combinations of parent entities.
+- Repeatable seed behavior by clearing MVP 1 tables before inserting fixed records.
+- Seed tests for counts, relationships, parent linkage, and repeatability.
+
 ## Available Commands
 
 Root commands:
@@ -65,6 +78,7 @@ Root commands:
 - `npm run db:migrate`
 - `npm run db:rollback`
 - `npm run db:status`
+- `npm run db:seed`
 - `npm run test`
 - `npm run test:coverage`
 - `npm run typecheck`
@@ -85,12 +99,12 @@ Server workspace commands:
 - `npm run migrate:latest --workspace server`
 - `npm run migrate:rollback --workspace server`
 - `npm run migrate:status --workspace server`
+- `npm run seed:run --workspace server`
 - `npm run test --workspace server`
 - `npm run test:coverage --workspace server`
 
 ## Intentionally Not Implemented Yet
 
-- Seed data.
 - Database access functions.
 - CRM API routes.
 - API validation/error handling beyond the scaffold health route.
@@ -110,14 +124,14 @@ Server workspace commands:
 - `SENIOR_CHECKLIST.md` exists and should continue to be used during review.
 - API contracts in `architecture.md` are still marked draft and should be reviewed before route implementation.
 - Follow-up parent ownership is not enforced at DB level by design. It must be enforced in application logic in a later task.
-- Current test coverage is focused on database migrations only. Seed, repository, API, validation, and frontend tests are planned for their respective tasks.
+- Current test coverage is focused on database migrations and seed data. Repository, API, validation, and frontend tests are planned for their respective tasks.
 
 ## Recommended Next Task
 
-Recommended next task: TASK-003, add MVP 1 seed data.
+Recommended next task: TASK-004, add backend database functions.
 
 Rationale:
-The approved schema now exists as migrations and has automated migration coverage. Seed data is the next dependency for manual database review and later backend data functions.
+The approved schema and seed data now exist with automated coverage. Backend database functions are the next dependency before API routes.
 
 ## TASK-002 Completion Checkpoint
 
