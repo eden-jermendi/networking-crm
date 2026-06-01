@@ -1,5 +1,5 @@
 import { Router } from "express";
-import type { Request, Response } from "express";
+import type { Request } from "express";
 import type { createContactRepository } from "../db/repositories/contacts.js";
 import type { createFollowUpRepository } from "../db/repositories/followUps.js";
 import type { createInteractionRepository } from "../db/repositories/interactions.js";
@@ -11,6 +11,15 @@ import type {
   CreateNetworkingEventInput,
   UpdateFollowUpInput
 } from "../db/types.js";
+import { notFound } from "./errors.js";
+import {
+  parsePositiveIntegerId,
+  validateCreateContact,
+  validateCreateFollowUp,
+  validateCreateInteraction,
+  validateCreateNetworkingEvent,
+  validateUpdateFollowUp
+} from "./validation.js";
 
 export type ApiDependencies = {
   contacts: ReturnType<typeof createContactRepository>;
@@ -27,16 +36,22 @@ export function createApiRouter(dependencies: ApiDependencies) {
   });
 
   router.get("/contacts/:id", async (request, response) => {
-    const id = Number(request.params.id);
+    const id = parsePositiveIntegerId(request.params.id, "contact id");
     const contact = await dependencies.contacts.getContactById(id);
 
-    sendRecordOrNotFound(response, contact);
+    if (!contact) {
+      throw notFound("Contact");
+    }
+
+    response.json(contact);
   });
 
   router.post(
     "/contacts",
     async (request: Request<unknown, unknown, CreateContactInput>, response) => {
-      const contact = await dependencies.contacts.createContact(request.body);
+      const contact = await dependencies.contacts.createContact(
+        validateCreateContact(request.body)
+      );
 
       response.status(201).json(contact);
     }
@@ -47,11 +62,18 @@ export function createApiRouter(dependencies: ApiDependencies) {
   });
 
   router.get("/networking-events/:id", async (request, response) => {
-    const id = Number(request.params.id);
+    const id = parsePositiveIntegerId(
+      request.params.id,
+      "networking event id"
+    );
     const networkingEvent =
       await dependencies.networkingEvents.getNetworkingEventById(id);
 
-    sendRecordOrNotFound(response, networkingEvent);
+    if (!networkingEvent) {
+      throw notFound("Networking event");
+    }
+
+    response.json(networkingEvent);
   });
 
   router.post(
@@ -61,7 +83,9 @@ export function createApiRouter(dependencies: ApiDependencies) {
       response
     ) => {
       const networkingEvent =
-        await dependencies.networkingEvents.createNetworkingEvent(request.body);
+        await dependencies.networkingEvents.createNetworkingEvent(
+          validateCreateNetworkingEvent(request.body)
+        );
 
       response.status(201).json(networkingEvent);
     }
@@ -74,7 +98,7 @@ export function createApiRouter(dependencies: ApiDependencies) {
       response
     ) => {
       const interaction = await dependencies.interactions.createInteraction(
-        request.body
+        validateCreateInteraction(request.body)
       );
 
       response.status(201).json(interaction);
@@ -88,7 +112,9 @@ export function createApiRouter(dependencies: ApiDependencies) {
   router.post(
     "/follow-ups",
     async (request: Request<unknown, unknown, CreateFollowUpInput>, response) => {
-      const followUp = await dependencies.followUps.createFollowUp(request.body);
+      const followUp = await dependencies.followUps.createFollowUp(
+        validateCreateFollowUp(request.body)
+      );
 
       response.status(201).json(followUp);
     }
@@ -100,24 +126,25 @@ export function createApiRouter(dependencies: ApiDependencies) {
       request: Request<{ id: string }, unknown, UpdateFollowUpInput>,
       response
     ) => {
-      const id = Number(request.params.id);
+      const id = parsePositiveIntegerId(request.params.id, "follow-up id");
+      const existingFollowUp = await dependencies.followUps.getFollowUpById(id);
+
+      if (!existingFollowUp) {
+        throw notFound("Follow-up");
+      }
+
       const followUp = await dependencies.followUps.updateFollowUp(
         id,
-        request.body
+        validateUpdateFollowUp(request.body, existingFollowUp)
       );
 
-      sendRecordOrNotFound(response, followUp);
+      if (!followUp) {
+        throw notFound("Follow-up");
+      }
+
+      response.json(followUp);
     }
   );
 
   return router;
-}
-
-function sendRecordOrNotFound<T>(response: Response, record: T | undefined) {
-  if (!record) {
-    response.status(404).json({ error: "Not found" });
-    return;
-  }
-
-  response.json(record);
 }

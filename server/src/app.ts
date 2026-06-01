@@ -1,5 +1,6 @@
 import express from "express";
 import { createDefaultApiDependencies } from "./routes/dependencies.js";
+import { errorHandler } from "./routes/errors.js";
 import { createApiRouter, type ApiDependencies } from "./routes/api.js";
 
 export function createApp(
@@ -14,6 +15,7 @@ export function createApp(
   });
 
   app.use("/api", createApiRouter(apiDependencies));
+  app.use(errorHandler);
 
   return app;
 }

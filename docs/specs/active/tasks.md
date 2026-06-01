@@ -328,8 +328,20 @@ Human reviews API behavior before validation/error handling is expanded.
 
 ### TASK-006: Add API validation and error handling
 
+Status: Complete
+
 Goal:
 Add simple application-level validation and consistent error responses for MVP 1 API routes.
+
+Completed scope:
+
+- Added dependency-free API validation helpers.
+- Added consistent JSON error responses for validation errors, invalid IDs, missing records, and unexpected server errors.
+- Added Express error handling middleware that avoids stack traces in normal API responses.
+- Enforced required fields for MVP 1 create/update routes.
+- Enforced follow-up parent ownership during create and update.
+- Added API route tests for valid requests, invalid IDs, missing records, validation errors, no-mutation invalid requests, and generic internal errors.
+- Manually checked valid and invalid API requests against the local dev server.
 
 Allowed changes:
 
@@ -348,10 +360,10 @@ Forbidden changes:
 
 Acceptance criteria:
 
-- Required fields are validated for create/update routes.
-- Follow-ups must be associated with at least one parent entity in application logic.
-- Invalid IDs and missing records return consistent errors.
-- Server does not expose stack traces in normal API responses.
+- [x] Required fields are validated for create/update routes.
+- [x] Follow-ups must be associated with at least one parent entity in application logic.
+- [x] Invalid IDs and missing records return consistent errors.
+- [x] Server does not expose stack traces in normal API responses.
 
 Required tests/checks:
 
