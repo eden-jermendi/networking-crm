@@ -276,8 +276,18 @@ Human reviews database function boundaries before HTTP API routes begin.
 
 ### TASK-005: Add MVP 1 backend API routes
 
+Status: Complete
+
 Goal:
 Expose the approved draft MVP 1 API routes using the backend database functions.
+
+Completed scope:
+
+- Added injectable Express API route wiring for approved MVP 1 routes.
+- Added production route dependencies backed by existing Knex repository factories.
+- Preserved `GET /health` response behavior.
+- Added API route tests for happy paths and missing-record behavior using mocked repository functions.
+- Manually checked approved routes against seeded local SQLite data.
 
 Allowed changes:
 
@@ -295,11 +305,11 @@ Forbidden changes:
 
 Acceptance criteria:
 
-- Approved contact, networking event, interaction, and follow-up endpoints exist.
-- `GET /health` remains unchanged.
-- Routes use database functions rather than inline SQL.
-- Upcoming follow-ups endpoint returns incomplete follow-ups ordered by due date.
-- Follow-up completion is supported.
+- [x] Approved contact, networking event, interaction, and follow-up endpoints exist.
+- [x] `GET /health` remains unchanged.
+- [x] Routes use database functions rather than inline SQL.
+- [x] Upcoming follow-ups endpoint returns incomplete follow-ups ordered by due date.
+- [x] Follow-up completion is supported.
 
 Required tests/checks:
 

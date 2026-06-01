@@ -2,9 +2,9 @@
 
 ## Current Stage
 
-Phase 1 MVP 1 data foundation is in progress.
+Phase 1 MVP 1 backend API foundation is in progress.
 
-TASK-002 database migrations are complete and ready for human review.
+TASK-005 backend API routes are complete and ready for human review.
 
 ## Completed Work
 
@@ -82,6 +82,31 @@ TASK-004 added:
 - Follow-up repository functions for upcoming list, read, create, and update behavior.
 - Repository tests using isolated SQLite databases with migrations and seed data.
 
+### TASK-005: Add MVP 1 backend API routes
+
+Status: Complete
+
+TASK-005 added:
+
+- Express API route wiring for the approved MVP 1 draft API surface.
+- Contact routes:
+  - `GET /api/contacts`
+  - `GET /api/contacts/:id`
+  - `POST /api/contacts`
+- Networking event routes:
+  - `GET /api/networking-events`
+  - `GET /api/networking-events/:id`
+  - `POST /api/networking-events`
+- Interaction route:
+  - `POST /api/interactions`
+- Follow-up routes:
+  - `GET /api/follow-ups/upcoming`
+  - `POST /api/follow-ups`
+  - `PATCH /api/follow-ups/:id`
+- Injectable route dependencies so API route tests can mock repository functions.
+- API route tests for approved happy paths and missing-record behavior.
+- Manual local checks against seeded SQLite data.
+
 ## Available Commands
 
 Root commands:
@@ -119,7 +144,6 @@ Server workspace commands:
 
 ## Intentionally Not Implemented Yet
 
-- CRM API routes.
 - API validation/error handling beyond the scaffold health route.
 - Frontend data fetching.
 - Frontend CRM screens or forms.
@@ -134,16 +158,17 @@ Server workspace commands:
 - `npm install` previously reported npm audit vulnerabilities from dependency output. These should be reviewed separately and not auto-fixed without understanding dependency impact.
 - The local SQLite database file is generated during migration checks and ignored by git.
 - `SENIOR_CHECKLIST.md` exists and should continue to be used during review.
-- API contracts in `architecture.md` are still marked draft and should be reviewed before route implementation.
-- Follow-up parent ownership is not enforced at DB level by design. It must be enforced in application logic in a later task.
-- Current test coverage is focused on database migrations, seed data, and repository functions. API, validation, and frontend tests are planned for their respective tasks.
+- API contracts in `architecture.md` are still marked draft and should be reviewed after TASK-005 route implementation.
+- Follow-up parent ownership is not enforced yet. It remains reserved for TASK-006 application-level validation.
+- TASK-005 only adds minimal missing-record responses. Consistent validation and error response shape remain TASK-006 work.
+- Current test coverage is focused on database migrations, seed data, repository functions, and API route behavior. Validation and frontend tests are planned for their respective tasks.
 
 ## Recommended Next Task
 
-Recommended next task: TASK-005, add MVP 1 backend API routes.
+Recommended next task: TASK-006, add API validation and error handling.
 
 Rationale:
-The approved schema, seed data, and database functions now exist with automated coverage. Backend API routes are the next dependency before API validation and frontend data fetching.
+The approved backend API route surface now exists. Validation and consistent error handling are the next backend dependency before frontend data fetching.
 
 ## TASK-002 Completion Checkpoint
 
