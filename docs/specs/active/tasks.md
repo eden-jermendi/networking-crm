@@ -380,8 +380,19 @@ Human reviews validation behavior before frontend data fetching begins.
 
 ### TASK-007: Add frontend data fetching setup
 
+Status: Complete
+
 Goal:
 Create minimal frontend API utilities for calling the MVP 1 backend routes without building CRM screens yet.
+
+Completed scope:
+
+- Added typed frontend API response and request types for MVP 1 entities.
+- Added fetch-based helpers for the approved contacts, networking events, interactions, and follow-ups endpoints.
+- Added structured API error handling for backend error responses and fallback request failures.
+- Added client Vitest setup and mocked-fetch API helper tests.
+- Updated root test scripts so client and server tests run together.
+- Kept frontend CRM screens and forms unimplemented.
 
 Allowed changes:
 
@@ -399,9 +410,9 @@ Forbidden changes:
 
 Acceptance criteria:
 
-- Frontend has simple typed helpers for approved MVP 1 API endpoints.
-- Helpers handle JSON responses and basic error cases.
-- No user-facing CRM workflow is implemented yet.
+- [x] Frontend has simple typed helpers for approved MVP 1 API endpoints.
+- [x] Helpers handle JSON responses and basic error cases.
+- [x] No user-facing CRM workflow is implemented yet.
 
 Required tests/checks:
 
