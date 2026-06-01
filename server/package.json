@@ -13,7 +13,8 @@
     "knex": "tsx ../node_modules/knex/bin/cli.js --knexfile knexfile.ts",
     "migrate:latest": "npm run knex -- migrate:latest",
     "migrate:rollback": "npm run knex -- migrate:rollback",
-    "migrate:status": "npm run knex -- migrate:status"
+    "migrate:status": "npm run knex -- migrate:status",
+    "seed:run": "npm run knex -- seed:run"
   },
   "dependencies": {
     "express": "^5.0.0",

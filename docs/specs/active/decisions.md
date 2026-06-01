@@ -59,3 +59,9 @@ Database migration tests use isolated in-memory SQLite databases instead of the 
 
 Decision 020:
 Mocking and HTTP interception should be used where they fit the layer under test: database-function tests may mock narrow boundaries when useful, API tests may use mocks around database functions, and frontend/API-client tests may use request interception. Direct migration tests should not mock the schema.
+
+Decision 021:
+TASK-003 seed data uses fictional but domain-specific junior developer networking scenarios. Seed data must not contain real personal contact details.
+
+Decision 022:
+TASK-003 seed data is repeatable by clearing MVP 1 tables in dependency order before inserting fixed local development records.

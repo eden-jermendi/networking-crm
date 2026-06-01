@@ -176,8 +176,18 @@ Human reviews the test setup before seed data begins.
 
 ### TASK-003: Add MVP 1 seed data
 
+Status: Complete
+
 Goal:
 Add minimal local seed data for the approved MVP 1 entities to support manual development and review.
+
+Completed scope:
+
+- Added local seed data for contacts, networking events, interactions, and follow-ups.
+- Used fictional but junior-developer-job-search-specific sample data.
+- Added seed command wiring through npm scripts.
+- Added seed tests covering counts, relationships, follow-up parent linkage, and repeatability.
+- Documented seed command in README.md.
 
 Allowed changes:
 
@@ -195,10 +205,10 @@ Forbidden changes:
 
 Acceptance criteria:
 
-- Seed data covers contacts, networking events, interactions, and follow-ups.
-- Seed data demonstrates an interaction linked to a contact and optionally an event.
-- Seed data demonstrates a follow-up linked to at least one parent entity.
-- Seeds are safe to run repeatedly in a local development database.
+- [x] Seed data covers contacts, networking events, interactions, and follow-ups.
+- [x] Seed data demonstrates an interaction linked to a contact and optionally an event.
+- [x] Seed data demonstrates a follow-up linked to at least one parent entity.
+- [x] Seeds are safe to run repeatedly in a local development database.
 
 Required tests/checks:
 
