@@ -38,3 +38,15 @@ Root script names for scaffold checks are `dev:client`, `dev:server`, `typecheck
 
 Decision 013:
 `docs/specs/active/db-schema.md` is the primary database schema source of truth for TASK-002 migrations.
+
+Decision 014:
+TASK-002 foreign key delete behavior = `RESTRICT` for all MVP 1 foreign keys.
+
+Decision 015:
+TASK-002 indexes include all foreign key columns, `follow_ups.due_at`, and `follow_ups(status, due_at)`.
+
+Decision 016:
+TASK-002 timestamp columns `created_at` and `updated_at` are required but do not use database defaults. Later application or seed logic must provide timestamp values.
+
+Decision 017:
+MVP 1 migrations are run through npm scripts: `db:migrate`, `db:rollback`, and `db:status`.

@@ -2,9 +2,9 @@
 
 ## Current Stage
 
-Phase 0 project setup is complete.
+Phase 1 MVP 1 data foundation is in progress.
 
-TASK-002 is paused after schema planning and before migration implementation.
+TASK-002 database migrations are complete and ready for human review.
 
 ## Completed Work
 
@@ -22,6 +22,23 @@ TASK-001 scaffolded:
 - Conservative root `.gitignore`.
 - README setup and development instructions.
 
+### TASK-002: Add MVP 1 database migrations
+
+Status: Complete
+
+TASK-002 added:
+
+- Knex migration for approved MVP 1 tables:
+  - `contacts`
+  - `networking_events`
+  - `interactions`
+  - `follow_ups`
+- Foreign key relationships matching `architecture.md`.
+- `RESTRICT` delete behavior for all foreign keys.
+- Indexes for foreign key columns, `follow_ups.due_at`, and `follow_ups(status, due_at)`.
+- Required timestamp columns without database defaults.
+- Root migration scripts and README migration instructions.
+
 ## Available Commands
 
 Root commands:
@@ -29,6 +46,9 @@ Root commands:
 - `npm install`
 - `npm run dev:client`
 - `npm run dev:server`
+- `npm run db:migrate`
+- `npm run db:rollback`
+- `npm run db:status`
 - `npm run typecheck`
 - `npm run build`
 
@@ -44,10 +64,12 @@ Server workspace commands:
 - `npm run build --workspace server`
 - `npm run start --workspace server`
 - `npm run typecheck --workspace server`
+- `npm run migrate:latest --workspace server`
+- `npm run migrate:rollback --workspace server`
+- `npm run migrate:status --workspace server`
 
 ## Intentionally Not Implemented Yet
 
-- Database migrations.
 - Seed data.
 - Database access functions.
 - CRM API routes.
@@ -63,18 +85,20 @@ Server workspace commands:
 ## Known Risks and TODOs
 
 - `npm install` previously reported npm audit vulnerabilities from dependency output. These should be reviewed separately and not auto-fixed without understanding dependency impact.
-- The SQLite database file path is configured, but no database directory, migrations, or runtime database connection module exists yet.
-- `SENIOR_CHECKLIST.md` was empty before this planning pass and now needs human review.
+- The local SQLite database file is generated during migration checks and ignored by git.
+- Runtime database connection modules do not exist yet.
+- `SENIOR_CHECKLIST.md` exists and should continue to be used during review.
 - API contracts in `architecture.md` are still marked draft and should be reviewed before route implementation.
+- Follow-up parent ownership is not enforced at DB level by design. It must be enforced in application logic in a later task.
 
 ## Recommended Next Task
 
-Recommended next task: resume TASK-002, add MVP 1 database migrations.
+Recommended next task: TASK-003, add MVP 1 seed data.
 
 Rationale:
-The scaffold is complete and the next dependency for all CRM behavior is the approved relational schema.
+The approved schema now exists as migrations, and seed data is the next dependency for manual database review and later backend data functions.
 
-## TASK-002 Resume Checkpoint
+## TASK-002 Completion Checkpoint
 
 Branch:
 
@@ -82,12 +106,8 @@ Branch:
 
 Current state:
 
-- Latest `origin/main` was fetched and pulled before TASK-002 planning.
-- Branch `feat/database-migrations` was created from latest `main`.
-- Required docs were read.
-- Existing Knex/SQLite config was inspected in `server/knexfile.ts`.
-- Migration implementation has not started.
-- No migrations, seed files, database functions, API routes, frontend code, auth, deployment, integrations, or future MVP work have been created.
+- Migration implementation is complete.
+- No seed files, database functions, API routes, frontend code, auth, deployment, integrations, or future MVP work have been created.
 
 Schema source of truth:
 
@@ -96,7 +116,7 @@ Schema source of truth:
 Planning result:
 
 - No conflicts were found between `db-schema.md`, `architecture.md`, and `decisions.md`.
-- The schema is ready to translate into Knex migrations after human approval of the open implementation details below.
+- The schema has been translated into Knex migrations.
 
 Tables to create:
 
@@ -118,24 +138,28 @@ Planned relationships:
 - `follow_ups.networking_event_id` references `networking_events.id`.
 - `follow_ups.interaction_id` references `interactions.id`.
 
-Recommended delete behavior awaiting approval:
+Approved delete behavior:
 
 - Use `RESTRICT` for all foreign keys.
 - Rationale: MVP 1 has no approved delete workflows, relationship history should be preserved, `CASCADE` could remove useful history, and `SET NULL` could orphan follow-ups.
 
-Recommended indexes awaiting approval:
+Approved indexes:
 
 - Index all foreign key columns.
 - Index `follow_ups.due_at`.
-- Consider index `follow_ups(status, due_at)` for upcoming follow-up queries.
+- Index `follow_ups(status, due_at)` for upcoming follow-up queries.
 
-Recommended timestamp behavior awaiting approval:
+Approved timestamp behavior:
 
 - Create required `created_at` and `updated_at` columns.
-- Do not add DB defaults unless explicitly approved.
+- Do not add DB defaults.
 - Let application or seed logic populate timestamp values in later tasks.
 
-Implementation reminder:
+TASK-002 verification performed:
 
-- TASK-002 may update only migration files/configuration as needed and README setup notes if migration commands need documentation.
-- TASK-002 must not create seeds, database functions, CRM API routes, frontend CRM screens, validation logic, auth, deployment configuration, external APIs, or future MVP functionality.
+- `npm run typecheck`
+- `npm run db:migrate`
+- SQLite schema inspection
+- `npm run db:rollback`
+- `npm run db:status`
+- `npm run build`

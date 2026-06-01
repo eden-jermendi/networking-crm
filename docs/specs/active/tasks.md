@@ -39,7 +39,7 @@ Stopped after scaffold only.
 
 ### TASK-002: Add MVP 1 database migrations
 
-Status: Paused after schema planning; implementation not started.
+Status: Complete
 
 Goal:
 Create Knex migrations for the approved MVP 1 tables and relationships.
@@ -61,11 +61,25 @@ Approved migration interpretation:
 - Do not add DB enum/check constraints for statuses or types.
 - Enforce "follow-up must have at least one parent entity" later in application logic, not in TASK-002 migrations.
 
-Pending human approval before implementation:
+Previously approved before implementation:
 
-- Confirm foreign key delete behavior. Current recommendation: `RESTRICT` for all foreign keys.
-- Confirm indexes. Current recommendation: index all foreign keys, `follow_ups.due_at`, and optionally `follow_ups(status, due_at)`.
-- Confirm timestamp handling. Current recommendation: required `created_at` and `updated_at` columns with values supplied by application/seed logic, not DB defaults.
+- Foreign key delete behavior: `RESTRICT` for all foreign keys.
+- Indexes: all foreign keys, `follow_ups.due_at`, and `follow_ups(status, due_at)`.
+- Timestamp handling: required `created_at` and `updated_at` columns with values supplied by application/seed logic, not DB defaults.
+
+Approved implementation decisions:
+
+- Foreign key delete behavior uses `RESTRICT` for all MVP 1 foreign keys.
+- Indexes include all foreign key columns, `follow_ups.due_at`, and `follow_ups(status, due_at)`.
+- Required `created_at` and `updated_at` columns do not use database defaults.
+
+Completed scope:
+
+- Added a Knex migration for `contacts`, `networking_events`, `interactions`, and `follow_ups`.
+- Configured Knex to use TypeScript migrations from `server/migrations`.
+- Added migration npm scripts.
+- Added a tracked `server/data/.gitkeep` so the local SQLite directory exists.
+- Documented migration commands in README.md.
 
 Allowed changes:
 
@@ -84,12 +98,12 @@ Forbidden changes:
 
 Acceptance criteria:
 
-- Migrations create only the approved MVP 1 tables.
-- Relationships match `architecture.md`.
-- Follow-up parent foreign keys may be nullable at DB level.
-- No DB enum constraints are added.
-- Migrations can run from a documented npm command.
-- Migrations can be rolled back cleanly.
+- [x] Migrations create only the approved MVP 1 tables.
+- [x] Relationships match `architecture.md`.
+- [x] Follow-up parent foreign keys may be nullable at DB level.
+- [x] No DB enum constraints are added.
+- [x] Migrations can run from a documented npm command.
+- [x] Migrations can be rolled back cleanly.
 
 Required tests/checks:
 
